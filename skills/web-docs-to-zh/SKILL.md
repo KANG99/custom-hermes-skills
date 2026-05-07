@@ -2,7 +2,7 @@
 name: web-docs-to-zh
 description: 将在线文档翻译成中文 Markdown 文件。提供通用 HTML 清洗管道，处理现代文档站（Docusaurus / Mintlify / VitePress / Sphinx 等）的 DOM 噪音（theme-admonition、复制按钮、锚点 #、活跃标记、侧边栏导航等）。
 author: kang99
-version: 1.0.0
+version: 1.0.1
 license: MIT
 metadata:
   hermes:
@@ -21,6 +21,8 @@ metadata:
 ### 中文触发短语
 - 「获取网页文档转换成中文md保存在xxx」
 - 「把这几个文档站翻译成中文」
+- 「https://xxxx.xxx/xxx转换成中文文档，并且保存」
+- 「将https://xxxx.xxx/xxx转换成md中文文档」
 
 ### English Trigger Phrases
 - "Translate this documentation to Chinese"
