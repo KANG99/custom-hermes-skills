@@ -21,8 +21,8 @@ metadata:
 ### 中文触发短语
 - 「获取网页文档转换成中文md保存在xxx」
 - 「把这几个文档站翻译成中文」
-- 「https://xxxx.xxx/xxx转换成中文文档，并且保存」
-- 「将https://xxxx.xxx/xxx转换成md中文文档」
+- 「https://xxxx.xxx/.../xxx转换成中文文档，并且保存」
+- 「将https://xxxx.xxx/.../xxx转换成md中文文档」
 
 ### English Trigger Phrases
 - "Translate this documentation to Chinese"
