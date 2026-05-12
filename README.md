@@ -2,7 +2,13 @@
 该项目主要介绍Hermes实际使用过程中总结归纳出的能够稳定产出的自定义skills，以及使用Hermes的部分实践经验。
 
 ## skills
-- web-docs-to_zh:将网页内容完整翻译成中文md文档，移除部分html标签，格式基本不变。
+- web-docs-to_zh:将网页内容完整翻译成中文md文档，移除部分无效html标签，内容及主要格式保持不变。
+- resume_creator:用来生成符合reactive-resume开源平台的json文件的skill
+- resume-validator:用来验证生成的json文件是否能够正常上传到reactive-resume平台，以及上传到平台后能否正常渲染。
+
+```diff
+-ps:实际上resume-creator和resume-validator都只是resume-worker的组件，resume-worker将会利用opencli查询用户想要找到的工作信息，然后再结合用户工作经历生成符合需求的简历，这部分内容还在创建中…………
+```
 
 ## usage
 以web-docs-to_zh为例，hermes安装skill指令如下：
@@ -31,7 +37,7 @@ hermes skills publish your-skill-name --to github --repo owner/repo
 
 **ubuntu端**
 ```
-#查看内网地址，找到类似1[92.168.x.xxx](http://92.168.1.xxx/)这串
+#查看内网地址，找到类似http://192.168.xxx.xxx这串
 ip a
 #在 Ubuntu 上新建低权限用户 hermes(自定义)
 sudo adduser hermes
