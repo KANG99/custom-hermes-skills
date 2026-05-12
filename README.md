@@ -5,10 +5,6 @@
 - web-docs-to_zh:将网页内容完整翻译成中文md文档，移除部分html标签，格式基本不变。
 
 ## usage
-将skill上传到自定义仓库（实际上就是利用Hermes提交PR）
-```
-hermes skills publish your-skill-name --to github --repo owner/repo
-```
 以web-docs-to_zh为例，hermes安装skill指令如下：
 ```bash
 hermes skills install KANG99/custom-hermes-skills/skills/web-docs-to-zh
@@ -24,6 +20,10 @@ hermes skills install web-docs-to-zh
 ```
 Resolving 'web-docs-to-zh'...
 Error: No skill named 'web-docs-to-zh' found in any source.
+```
+如果需要将skills上传到自定义仓库，指令模版如下（实际上就是利用Hermes提交PR）
+```
+hermes skills publish your-skill-name --to github --repo owner/repo
 ```
 
 ## ssh远程沙箱
