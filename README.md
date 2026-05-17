@@ -3,15 +3,15 @@
 
 ## skills
 - web-docs-to_zh:将网页内容完整翻译成中文md文档，移除部分无效html标签，内容及主要格式保持不变。
-- resume_creator:用来生成符合reactive-resume开源平台的json文件的skill
-- resume-validator:用来验证生成的json文件是否能够正常上传到reactive-resume平台，以及上传到平台后能否正常渲染。
+- resume_creator:用来生成符合reactive-resume开源平台的json格式数据，最终将导出json格式的简历及PDF格式的简历
 
 ```diff
--ps:实际上resume-creator和resume-validator都只是resume-worker的组件，resume-worker将会利用opencli查询用户想要找到的工作信息，然后再结合用户工作经历生成符合需求的简历，这部分内容还在创建中…………
+-ps:实际上resume-creator可以和opencli skill结合使用，查询用户想要找到的工作信息，然后再结合用户工作经历生成符合个性化的简历，这部分内容还在创建中…………
 ```
 
 ## usage
-以web-docs-to_zh为例，hermes安装skill指令如下：
+### web-docs-to_zh
+hermes安装skill指令如下：
 ```bash
 hermes skills install KANG99/custom-hermes-skills/skills/web-docs-to-zh
 ```
@@ -31,6 +31,23 @@ Error: No skill named 'web-docs-to-zh' found in any source.
 ```
 hermes skills publish your-skill-name --to github --repo owner/repo
 ```
+prompt
+```
+请将https://xxx.xxx/...翻译成中文md文档，并且保存在xxx
+```
+### resume-creator
+实际上resume-reactive项目已经提供了[resume-builder](https://github.com/amruthpillai/reactive-resume/tree/main/skills/resume-builder)这个技能，但是存在以下缺陷：
+- 该技能是通过询问的方式创建简历的，需要一步步按照该技能提示输入内容
+- 最终生成json文件，还需要手动导入到reactive-resume服务端渲染生成简历
+- 检验生成的json文件只提供了schema.json及部分示例，生成的json文件基本不可用
+- 即使生成的结果会校验检查，但是无法检查出实际出错的字段
+resume-creator完成了简历的一站式生成，确保正常简历输出：
+- 直接提供完整的个人信息，不通过询问方式生成简历json数据
+- 提供简历Ditgar、Chikorita、Azurill模版的json数据
+- 通过sh脚本验证json的schema字段是否合规
+- 通过访问reactive resume提供的API接口对生成的数据进行导入reactive resume平台验证
+- 成功导入数据后，会将简历以PDF格式导出保存在桌面上
+这个skill会用到比较多的终端指令，Hermes的安全性是由llm去审核的，比较严格，需要用户审批，所以运行这个skill最好在docker运行绕过
 
 ## ssh远程沙箱
 如果需要验证skill及代码安全性，建议使用远程沙箱或者docker运行的方式，以ubuntu作为远程沙箱为例：
