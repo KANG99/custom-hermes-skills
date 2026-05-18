@@ -53,7 +53,8 @@ resume-creator完成了简历的一站式生成，确保正常简历输出：
 这个skill会用到比较多的终端指令，Hermes对于本地终端命令执行默认是`manual`，需要用户手动审批，所以运行这个skill最好在docker运行绕过审批或者ssh远程终端关闭审批执行。
 
 ## docker终端配置
-很简单，修改config.yaml配置文件终端配置就可以了
+
+修改config.yaml配置文件终端配置
 ```yaml
 terminal:
   backend: docker
@@ -76,8 +77,15 @@ terminal:
 - 将backend设为docker
 - 设置转发到容器内的环境变量
 - 修改docker_volumes项目目录
-  - /home/user/projects：host路径，比如设置为用户桌面上的resume文件夹的绝对路径
+  - /home/user/projects：host路径,比如设置为桌面上的resume文件夹：～/Desktop/resume
   - /workspace/projects：container路径比如设置为workspace/resume
+  - 此时：
+    - 主机 ~/Desktop/resume  → 容器 /workspace/resume/                                             
+    - 主机 ~/.hermes         → 容器 /root/.hermes/
+   
+在resume-creator的SKILL.md中保存路径和reactive-resume本地服务url有所调整：
+- 主机访问：https://localhost:3000 -> 容器访问：http://host.docker.internal:3000
+- 主机保存路径 ～/Desktop/resume -> 容器保存路径：/workspace/resume
 
 ## ssh远程终端配置
 如果用远程终端，可以最大化安全，在远程机或者vm上运行网关，保持网关的消息与代理的命令执行分开，以ubuntu作为远程终端为例：
