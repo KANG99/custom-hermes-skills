@@ -41,16 +41,46 @@ prompt
 - 最终生成json文件，还需要手动导入到reactive-resume服务端渲染生成简历
 - 检验生成的json文件只提供了schema.json及部分示例，生成的json文件基本不可用
 - 即使生成的结果会校验检查，但是无法检查出实际出错的字段
+
 resume-creator完成了简历的一站式生成，确保正常简历输出：
 - 直接提供完整的个人信息，不通过询问方式生成简历json数据
 - 提供简历Ditgar、Chikorita、Azurill模版的json数据
 - 通过sh脚本验证json的schema字段是否合规
 - 通过访问reactive resume提供的API接口对生成的数据进行导入reactive resume平台验证
 - 成功导入数据后，会将简历以PDF格式导出保存在桌面上
-这个skill会用到比较多的终端指令，Hermes的安全性是由llm去审核的，比较严格，需要用户审批，所以运行这个skill最好在docker运行绕过
+- `待完善功能通过opencli指令获取需要的招聘信息，结合个人信息生成个性化简历`
 
-## ssh远程沙箱
-如果需要验证skill及代码安全性，建议使用远程沙箱或者docker运行的方式，以ubuntu作为远程沙箱为例：
+这个skill会用到比较多的终端指令，Hermes对于本地终端命令执行默认是`manual`，需要用户手动审批，所以运行这个skill最好在docker运行绕过审批或者ssh远程终端关闭审批执行。
+
+## docker终端配置
+很简单，修改config.yaml配置文件终端配置就可以了
+```yaml
+terminal:
+  backend: docker
+  docker_image: "nikolaik/python-nodejs:python3.11-nodejs20"
+  docker_mount_cwd_to_workspace: false  # 将启动目录挂载到 /workspace
+  docker_run_as_host_user: false   # 详见"以宿主机用户身份运行容器"
+  docker_forward_env:              # 转发到容器内的环境变量
+    - "GITHUB_TOKEN"
+  docker_volumes:                  # 宿主机目录挂载
+    - "/home/user/projects:/workspace/projects"
+    - "/home/user/data:/data:ro"   # :ro 表示只读
+
+  # 资源限制
+  container_cpu: 1                 # CPU 核心（0 = 无限制）
+  container_memory: 5120           # MB（0 = 无限制）
+  container_disk: 51200            # MB（需要 XFS+pquota 上的 overlay2）
+  container_persistent: true       # 跨会话持久化 /workspace 和 /root
+```
+实际上只要修改以下内容：
+- 将backend设为docker
+- 设置转发到容器内的环境变量
+- 修改docker_volumes项目目录
+  - /home/user/projects：host路径，比如设置为用户桌面上的resume文件夹的绝对路径
+  - /workspace/projects：container路径比如设置为workspace/resume
+
+## ssh远程终端配置
+如果用远程终端，可以最大化安全，在远程机或者vm上运行网关，保持网关的消息与代理的命令执行分开，以ubuntu作为远程终端为例：
 
 **ubuntu端**
 ```
