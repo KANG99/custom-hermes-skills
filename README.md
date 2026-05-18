@@ -2,7 +2,7 @@
 该项目主要介绍Hermes实际使用过程中总结归纳出的能够稳定产出的自定义skills，以及使用Hermes的部分实践经验。
 
 ## skills
-- web-docs-to_zh:将网页内容完整翻译成中文md文档，移除部分无效html标签，内容及主要格式保持不变。
+- [web-docs-to_zh](https://github.com/KANG99/custom-hermes-skills/tree/main/skills/web-docs-to-zh):将网页内容完整翻译成中文md文档，移除部分无效html标签，内容及主要格式保持不变。
 - resume_creator:用来生成符合reactive-resume开源平台的json格式数据，最终将导出json格式的简历及PDF格式的简历
 
 ```diff
