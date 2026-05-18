@@ -49,7 +49,7 @@ resume-creator完成了简历的一站式生成，确保正常简历输出：
 
 - 通过sh脚本验证json的schema字段是否合规
 - 通过访问reactive resume提供的API接口对生成的数据进行导入reactive resume平台验证
-- 成功导入数据后，会将简历以PDF格式导出保存在桌面上
+- 成功导入数据后，会将简历以json及PDF格式导出保存在桌面上（注意docker设置容器内项目目录为\workspace\resume）
 - `待完善功能通过opencli指令获取需要的招聘信息，结合个人信息生成个性化简历`
 
 这个skill会用到比较多的终端指令，Hermes对于本地终端命令执行默认是`manual`，需要用户手动审批，所以运行这个skill最好在docker运行绕过审批或者ssh远程终端关闭审批执行。
