@@ -44,7 +44,9 @@ prompt
 
 resume-creator完成了简历的一站式生成，确保正常简历输出：
 - 直接提供完整的个人信息，不通过询问方式生成简历json数据
-- 提供简历Ditgar、Chikorita、Azurill模版的json数据
+- 提供简历Ditgar、Chikorita、Azurill模版的实例json数据
+<img src="https://github.com/KANG99/custom-hermes-skills/blob/main/resume_templates.png" width=600 height=400>
+
 - 通过sh脚本验证json的schema字段是否合规
 - 通过访问reactive resume提供的API接口对生成的数据进行导入reactive resume平台验证
 - 成功导入数据后，会将简历以PDF格式导出保存在桌面上
